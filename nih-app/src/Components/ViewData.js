@@ -51,8 +51,35 @@ export default function Body(props) {
                 <tr>
 
                   <th scope="col">Patient Id Number</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Age</th>
+                  <th scope="col">Country	</th>
+                  <th scope="col">Education		</th>
+                  <th scope="col">Employment	</th>
+                  <th scope="col">Case_definition</th>
+                  <th scope="col">Type_of_resistance</th>
+                  <th scope="col">X_ray_count	</th>
+                  <th scope="col">Organization	</th>
+                  <th scope="col">Affect_pleura	</th>
+                  <th scope="col">Overall_percent_of_abnormal_volume</th>
+                  <th scope="col">Le_isoniazid	</th>
+                  <th scope="col">Le_rifampicin</th>
+                  <th scope="col">Le_p_aminosalicylic_acid	</th>
+                  <th scope="col">Hain_isoniazid</th>
+                  <th scope="col">Hain_rifampicin</th>
+                  <th scope="col">Period_start</th>
+                  <th scope="col">Period_end	</th>
+                  <th scope="col">Period_span	</th>
+                  <th scope="col">Regimen_count</th>
+                  <th scope="col">Qure_peffusion	</th>
+                  <th scope="col">Treatment_status</th>
+                  <th scope="col">Regimen_drug</th>
+                  <th scope="col">Comorbidity</th>
+                  <th scope="col">Ncbi_bioproject</th>
+                  <th scope="col">Gene_name	</th>
+                  <th scope="col">X_ray_exists	</th>
+                  <th scope="col">Ct_exists	</th>
+                  <th scope="col">Genomic_data_exists</th>
+                  <th scope="col">Qure_consolidation</th>
+                  <th scope="col">Outcome</th>
                 </tr>
               </thead>
               <tbody id="bodytable">
@@ -60,9 +87,35 @@ export default function Body(props) {
                   <tr id="bodytableelements">
                     
                       <td>{patients.id}</td>
-                      <td>{patients.name}</td>
-                      <td>{patients.age}</td>
-                    
+                      <td>{patients.country	}</td>
+                      <td>{patients.education	}</td>
+                      <td>{patients.employment	}</td>
+                      <td>{patients.case_definition}</td>
+                      <td>{patients.type_of_resistance}</td>
+                      <td>{patients.x_ray_count	}</td>
+                      <td>{patients.organization	}</td>
+                      <td>{patients.affect_pleura	}</td>
+                      <td>{patients.overall_percent_of_abnormal_volume}</td>
+                      <td>{patients.le_isoniazid	}</td>
+                      <td>{patients.le_rifampicin}</td>
+                      <td>{patients.le_p_aminosalicylic_acid	}</td>
+                      <td>{patients.hain_isoniazid}</td>
+                      <td>{patients.hain_rifampicin}</td>
+                      <td>{patients.period_start}</td>
+                      <td>{patients.period_end	}</td>
+                      <td>{patients.period_span	}</td>
+                      <td>{patients.regimen_count}</td>
+                      <td>{patients.qure_peffusion	}</td>
+                      <td>{patients.treatment_status}</td>
+                      <td>{patients.regimen_drug}</td>
+                      <td>{patients.comorbidity}</td>
+                      <td>{patients.ncbi_bioproject}</td>
+                      <td>{patients.gene_name	}</td>
+                      <td>{patients.x_ray_exists	}</td>
+                      <td>{patients.ct_exists	}</td>
+                      <td>{patients.genomic_data_exists}</td>
+                      <td>{patients.qure_consolidation}</td>     
+                      <td>{patients.outcome}</td>            
                   </tr>
                 ))}
               </tbody>

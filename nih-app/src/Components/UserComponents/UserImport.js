@@ -1,4 +1,3 @@
-
 import {CSVLink} from 'react-csv';
 import React, { useState, CSSProperties } from 'react';
 import {toast} from 'react-toastify'; 
@@ -7,11 +6,6 @@ import {
   lightenDarkenColor,
   formatFileSize,
 } from 'react-papaparse';
-import APIService from '../Components/APIService'
-
-function importdatacheck(){
-
-}
 
 
 
@@ -97,55 +91,18 @@ const styles = {
 
 
 export default function ImportExport(props) {
-  const [result,setResult] = useState([]);
-  const [flage,setFlage] = useState("true");
  var filename;
+ const [filenames, setFilename] = useState('')
+ const [result, setResult] = useState('')
+ const [flage,setFlage]=useState("False");
 
-  var importflage=false;
-  const [name, setName] = useState('')
-  const [age, setAge] = useState('')
-  // API for post notifications
-    function InsertNotifications(body){
-    return fetch(`http://localhost:5000/notifications`,{
-        'method':'POST',
-         headers : {
-        'Content-Type':'application/json'
-  },
-  body:JSON.stringify(body)
-})
-.then(response => response.json())
-.catch(error => console.log(error))
-}
-function InsertData(body){
-  return fetch(`http://localhost:5000/adminadddata`,{
-      'method':'POST',
-       headers : {
-      'Content-Type':'application/json'
-},
-body:JSON.stringify(body)
-})
-.then(response => response.json())
-.catch(error => console.log(error))
-}
-  // API for post new imports
-
-  function InsertRecord(body){
-    return fetch(`http://localhost:5000/add`,{
-        'method':'POST',
-         headers : {
-        'Content-Type':'application/json'
-  },
-  body:JSON.stringify(body)
-})
-.then(response => response.json())
-.catch(error => console.log(error))
-}
-////////////////to input checks
-function resultcheck(e){
-  if(flage=="True"){
+ function importdata(e){
+if(flage=="True"){ 
   for(var i=0;i<result.length;i++){
   
     let data1={
+      'filename':filename,
+      'importedby':"user1",
       'country':result[i].country,
       'education':result[i].education,
       'employment':result[i].employment,
@@ -176,8 +133,8 @@ function resultcheck(e){
       'qure_consolidation':result[i].qure_consolidation,
       'outcome':result[i].outcome
     }
+   
     InsertData(data1)
-    
   //   if(flage=="True"){ 
   //   console.log(data1)
   //   InsertData(data1)
@@ -188,12 +145,52 @@ function resultcheck(e){
   // }
 
   }
+  let notificationdata={
+    'filename':filename,
+    'username':'User1',
+    'status':'pending',
+  }
+  InsertNotifications(notificationdata);
   alert("Import Successfull");
 }
 else{
-  alert("Error:Wrong Dataset Format ")
+alert("Error:Wrong Dataset Format");
 }
 }
+  var importflage=false;
+
+  // API for post notifications
+    function InsertNotifications(body){
+    return fetch(`http://localhost:5000/addnotifications`,{
+        'method':'POST',
+         headers : {
+        'Content-Type':'application/json'
+  },
+  body:JSON.stringify(body)
+})
+.then(response => response.json())
+.catch(error => console.log(error))
+}
+
+
+
+  // API for post new imports
+  function InsertData(body){
+    return fetch(`http://localhost:5000/useradddata`,{
+        'method':'POST',
+         headers : {
+        'Content-Type':'application/json'
+  },
+  body:JSON.stringify(body)
+})
+.then(response => response.json())
+.catch(error => console.log(error))
+}
+
+
+
+
+
 //   const [importdata,setImportData] = useState([]);
 // //   function insertTo(body){
 // //     return(
@@ -215,25 +212,11 @@ else{
 // //     toast.success("Record inserted Successfully",{autoClose:2500});
 // // }
   
-  function importcheck(){
-    
-  var x=document.getElementById("importinfo");
-  var z = document.getElementById("remove");
-    if(x.innerText==="Uploaded"){
-      importflage=true;
-      alert("Successfull Upload")
-      var y = document.getElementById("importinfo");
-      y.innerText=""
-      z.style.visibility="hidden"
-      
-    }
-  }
   const { CSVReader } = useCSVReader();
   const [zoneHover, setZoneHover] = useState(false);
   const [removeHoverColor, setRemoveHoverColor] = useState(
     DEFAULT_REMOVE_HOVER_COLOR
   );
-
 
   const templatedata=[{country:"",	
   education:"",	
@@ -299,6 +282,7 @@ const templateheader=[
   
 
 ]
+
 const header=[
   
     {label:'Id',key:'id'},
@@ -308,7 +292,7 @@ const header=[
   
 ];
 const templateDownload={
-  filename:"Nih-template.csv",
+  filename:"NIH-template.csv",
   headers:templateheader,
   data:templatedata
 };
@@ -355,12 +339,12 @@ const Export={
             accessor:col.split(" ").join("_").toLowerCase(),
           };
         });
-         
+        
+         setFilename(filename)
         var result=[];
         var keys=results.data[0];
         for(var i=1;i<results.data.length-1;i++){
           var item={};
-         
           item[keys[0]]=results.data[i][0];
           item[keys[1]]=results.data[i][1];
           item[keys[2]]=results.data[i][2];
@@ -392,108 +376,83 @@ const Export={
           item[keys[28]]=results.data[i][28];
           result.push(item);
         }
-        setResult(result);
-        console.log(result)
-        // flage to check wheather the import is according to format or not
+        let notificationdata={
+          'filename':filename,
+          'username':'User1',
+          'status':'pending',
+        }
         for(var i=0;i<29;i++){
       
-        if(data[i]==results.data[0][i]){
-          setFlage("True");
+          if(data[i]==results.data[0][i]){
+            setFlage("True");
+          }
+          else{
+            setFlage("False");
+          }
+          }
+
+        setResult(result)
+        for(var i=0;i<result.length;i++){
+          let data1={
+            'filename':filename,
+            'importedby':"user1",
+            'country':result[i].country,
+            'education':result[i].education,
+            'employment':result[i].employment,
+            'case_definition':result[i].case_definition,
+            'type_of_resistance':result[i].type_of_resistance,
+            'x_ray_count':result[i].x_ray_count,
+            'organization':result[i].organization,
+            'affect_pleura':result[i].affect_pleura,
+            'overall_percent_of_abnormal_volume':result[i].overall_percent_of_abnormal_volume,
+            'le_isoniazid':result[i].le_isoniazid,
+            'le_rifampicin':result[i].le_rifampicin,
+            'le_p_aminosalicylic_acid':result[i].le_p_aminosalicylic_acid,
+            'hain_isoniazid':result[i].hain_isoniazid,
+            'hain_rifampicin':result[i].hain_rifampicin,
+            'period_start':result[i].period_start,
+            'period_end':result[i].period_end,
+            'period_span':result[i].period_span,
+            'regimen_count':result[i].regimen_count,
+            'qure_peffusion':result[i].qure_peffusion,
+            'treatment_status':result[i].treatment_status,
+            'regimen_drug':result[i].regimen_drug,
+            'comorbidity':result[i].comorbidity,
+            'ncbi_bioproject':result[i].ncbi_bioproject,
+            'gene_name':result[i].gene_name,
+            'x_ray_exists':result[i].x_ray_exists,
+            'ct_exists':result[i].ct_exists,
+            'genomic_data_exists':result[i].genomic_data_exists,
+            'qure_consolidation':result[i].qure_consolidation,
+            'outcome':result[i].outcome
+          }
+       
+      
+        }
+       
+      
+          
+           
+        // InsertNotifications(notificationdata);
+          
+       
+        const columns=results.data[0].map((col,index)=>{
+         if(col===data[index]){
+          console.log(col)
+          document.getElementById("importinfo").innerText="Uploaded";
+          document.getElementById("importinfo").style.color="green";
+          console.log("fine")
+        
         }
         else{
-          setFlage("False");
-        }
-        }
-        //////////////////
-        let data1={
-          'country':result[i].country,
-          'education':result[i].education,
-          'employment':result[i].employment,
-          'case_definition':result[i].case_definition,
-          'type_of_resistance':result[i].type_of_resistance,
-          'x_ray_count':result[i].x_ray_count,
-          'organization':result[i].organization,
-          'affect_pleura':result[i].affect_pleura,
-          'overall_percent_of_abnormal_volume':result[i].overall_percent_of_abnormal_volume,
-          'le_isoniazid':result[i].le_isoniazid,
-          'le_rifampicin':result[i].le_rifampicin,
-          'le_p_aminosalicylic_acid':result[i].le_p_aminosalicylic_acid,
-          'hain_isoniazid':result[i].hain_isoniazid,
-          'hain_rifampicin':result[i].hain_rifampicin,
-          'period_start':result[i].period_start,
-          'period_end':result[i].period_end,
-          'period_span':result[i].period_span,
-          'regimen_count':result[i].regimen_count,
-          'qure_peffusion':result[i].qure_peffusion,
-          'treatment_status':result[i].treatment_status,
-          'regimen_drug':result[i].regimen_drug,
-          'comorbidity':result[i].comorbidity,
-          'ncbi_bioproject':result[i].ncbi_bioproject,
-          'gene_name':result[i].gene_name,
-          'x_ray_exists':result[i].x_ray_exists,
-          'ct_exists':result[i].ct_exists,
-          'genomic_data_exists':result[i].genomic_data_exists,
-          'qure_consolidation':result[i].qure_consolidation,
-          'outcome':result[i].outcome
-        }
-        // for(var i=0;i<result.length;i++){
-
-        //   let data1={
-        //     'country':result[i].country,
-        //     'education':result[i].education,
-        //     'employment':result[i].employment,
-        //     'case_definition':result[i].case_definition,
-        //     'type_of_resistance':result[i].type_of_resistance,
-        //     'x_ray_count':result[i].x_ray_count,
-        //     'organization':result[i].organization,
-        //     'affect_pleura':result[i].affect_pleura,
-        //     'overall_percent_of_abnormal_volume':result[i].overall_percent_of_abnormal_volume,
-        //     'le_isoniazid':result[i].le_isoniazid,
-        //     'le_rifampicin':result[i].le_rifampicin,
-        //     'le_p_aminosalicylic_acid':result[i].le_p_aminosalicylic_acid,
-        //     'hain_isoniazid':result[i].hain_isoniazid,
-        //     'hain_rifampicin':result[i].hain_rifampicin,
-        //     'period_start':result[i].period_start,
-        //     'period_end':result[i].period_end,
-        //     'period_span':result[i].period_span,
-        //     'regimen_count':result[i].regimen_count,
-        //     'qure_peffusion':result[i].qure_peffusion,
-        //     'treatment_status':result[i].treatment_status,
-        //     'regimen_drug':result[i].regimen_drug,
-        //     'comorbidity':result[i].comorbidity,
-        //     'ncbi_bioproject':result[i].ncbi_bioproject,
-        //     'gene_name':result[i].gene_name,
-        //     'x_ray_exists':result[i].x_ray_exists,
-        //     'ct_exists':result[i].ct_exists,
-        //     'genomic_data_exists':result[i].genomic_data_exists,
-        //     'qure_consolidation':result[i].qure_consolidation,
-        //     'outcome':result[i].outcome
-        //   }
-          
-        //   console.log(name);
-        //   InsertData(data1)
+       
+        document.getElementById("importinfo").innerText="*Incorrect File Format";
+        document.getElementById("importinfo").style.color="red";
+      
         
-        // }
-      //  // let data2={
-      //     "username":"User1",
-      //     "filename":filename,
-      //   }
-      //  InsertNotifications(data2);
-       //
-        // setImportData(result);
-        // usercounter();
-        // insertTo(result);
-        // const rows=results.data.slice(1).map((row)=>{
-        //   return results.data.reduce((acc,curr,index)=>{
-        //     acc[cols[index].accessor]=curr;
-        //     return acc;
-        //   });
-        // });
-        // console.log(cols); 
-       // console.log(rows); 
-       console.log("results data[0]")
-       console.log(results.data[0])
         
+        }
+        });
 
         console.log('---------------------------');
         setZoneHover(false);
@@ -563,10 +522,9 @@ const Export={
         </>
       )}
     </CSVReader>
-    <p id="importinfo" style={{color:"red"}}></p>
     <br />
-    <button type="button" onClick={() =>{resultcheck(this)}} id='Importbtn' className="btn btn-primary btn-md" style={{ backgroundColor: '#62306A', width: '100px' }}>Import</button>
-  
+    <button type="button" onClick={importdata} id='Importbtn' className="btn btn-primary btn-md" style={{ backgroundColor: '#62306A', width: '100px' }}>Import</button>
+    
      </div>
      
 

@@ -7,6 +7,9 @@ import {useState,useEffect} from 'react';
 import UserNav from '../Components/UserComponents/UserNav';
 import ImportExport from '../Components/ImportExport';
 import MakePrediction from '../Components/UserComponents/MakePrediction';
+import UserImport from '../Components/UserComponents/UserImport';
+import UserNotifications from '../Components/UserComponents/UserNotifications';
+
 import {
   BrowserRouter,
   Switch,
@@ -36,15 +39,16 @@ export default function UserPage() {
 <UserNav/>
 <BrowserRouter>
     <Routes>
-      <Route path="/" element={<ViewData patients={patients}/>}>
+      <Route path="/viewdata" element={<ViewData patients={patients}/>}>
         
       </Route>
       <Route path="/makeprediction" element={<MakePrediction />} />
-      <Route path="/importexport" element={<ImportExport patients={patients} />} />
+      <Route path="/userimport" element={<UserImport patients={patients} />} />
       <Route path="/preprocess" element={<Preprocess />} />
+      <Route path="/"  element={<UserNotifications />} />
     </Routes>
   </BrowserRouter>
-<Outlet/>
+
 
 <Footer/>
   </>

@@ -8,7 +8,13 @@ import ImportExport from './Components/ImportExport';
 import AdminPage from './Pages/AdminPage'
 import UserPage from './Pages/UserPage'
 import Homepage from './Pages/Homepage'
+import MakePrediction from './Components/UserComponents/MakePrediction';
+import UserImport from './Components/UserComponents/UserImport';
+import UserNotifications from './Components/UserComponents/UserNotifications';
+import AdminNav from './Components/AdminNav';
+import AdminNotifications from './Components/AdminNotifications';
 import React,{useState,useEffect} from 'react';
+import UserNav from './Components/UserComponents/UserNav';
 import {
   Router,
   Switch,
@@ -19,7 +25,11 @@ import {
   Outlet,
 } from "react-router-dom";
 function App() {
- 
+  // const [userState, setUserState] = useState([])
+
+  // const toggle = function (val) {
+  //     setUserState(userState => val)
+  // }
   const [patients,setPatients] = useState([]);
   useEffect(()=>{
       fetch('http://localhost:5000/get',{
@@ -35,11 +45,57 @@ function App() {
       .catch(error => console.log(error))
 
   },[])
+  const [records,setRecord] = useState([]);
+  const insertedRecord =(record)=>{
+    const new_record = [...records,record]
+    setRecord(new_record)
+  }
   
   return (
+   
     
     <>
- 
+    {/* <button id="User" onClick={() => { toggle("User") }}>User</button>
+     <Header/>
+    {userState == "" && <div>
+    <button id="Admin" onClick={() => { toggle("Admin") }} >Admin</button>
+      <button id="User" onClick={() => { toggle("User") }}>User</button>
+            </div>
+            }
+ {userState == "Admin" && <div>
+  <AdminNav/>
+ <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<ViewData patients={patients}/>}>
+        
+      </Route>
+      <Route path="/importexport" element={<ImportExport patients={patients} insertedRecord={insertedRecord}/>} />
+      <Route path="/preprocess" element={<Preprocess insertedRecord={insertedRecord} />} />
+      <Route path="/adminnotifications" element={<AdminNotifications/>} />
+    </Routes>
+  </BrowserRouter>
+    
+    <Footer/>
+            </div>
+            }
+            {userState == "User" && <div>
+              <UserNav/>
+            <BrowserRouter>
+    <Routes>
+      <Route path="/viewdata" element={<ViewData patients={patients}/>}>
+        
+      </Route>
+      <Route path="/makeprediction" element={<MakePrediction />} />
+      <Route path="/userimport" element={<UserImport patients={patients} />} />
+      <Route path="/preprocess" element={<Preprocess />} />
+      <Route path="/"  element={<UserNotifications />} />
+    </Routes>
+  </BrowserRouter>
+    <Footer/>
+            </div>
+            } */}
+
+
 {/* <BrowserRouter>
 <Routes>
       <Route path="/AdminPage" element={<AdminPage/>}>
@@ -85,25 +141,29 @@ function App() {
     </Routes>
   </BrowserRouter> */}
 
+
+
+
+
+
+
 {/* <BrowserRouter>
-<nav>
-        <Link to="AdminPage"> Admin </Link>
-        <Link to="UserPage"> User </Link>
-      
-      </nav>
 <Routes>
- 
-  <Route path="/AdminPage" element={AdminPage}>
-    <
+  <Route path="/AdminPage" element={AdminPage}/>
+    
   <Route path="/UserPage" element={UserPage}/>
   
 </Routes>
-</BrowserRouter>
-  */}
-  <Header/>
-    <AdminPage />
-
+</BrowserRouter> */}
+ <Header/>
+<UserPage/>
 <Footer/>
+
+
+  
+   
+
+
     </>
   );
 }

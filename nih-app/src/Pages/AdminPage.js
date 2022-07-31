@@ -36,6 +36,7 @@ export default function AdminPage() {
       .catch(error => console.log(error))
 
   },[])
+  
   return (
 <>
 

@@ -24,7 +24,7 @@ export default function Header() {
         <div className="col-lg-12 col-mg-12 col-sm-12" id="top" style={{backgroundColor:'#D4D4D4',borderBlockStyle:"ridge"}}>
           <span> U.S. Department of Health &amp; Human Services|National Institutes of Health|National Institute of Allergy
             and Infectious Diseases</span>
-            <button type="button" className="btn btn-link" style={{color: 'black',float:"right"}}>Login</button>
+            
         </div>
         <div className="col-lg-12 col-mg-12 col-sm-12" id="top2">
           <img src={Logo} alt="" style={{marginLeft: '2px',maxHeight:"100%",maxWidth:"100%",objectfit:'cover'}} />
