@@ -5,9 +5,13 @@ import Footer from '../Components/Footer';
 import ViewData from '../Components/ViewData';
 import {useState,useEffect} from 'react';
 import UserNav from '../Components/UserComponents/UserNav';
+import Formpage from '../Components/UserComponents/Formpage';
+
 import ImportExport from '../Components/ImportExport';
 import MakePrediction from '../Components/UserComponents/MakePrediction';
 import UserImport from '../Components/UserComponents/UserImport';
+import Form from "../Components/UserComponents/Formpage";
+import SelectType from '../Components/UserComponents/SelectType';
 import UserNotifications from '../Components/UserComponents/UserNotifications';
 
 import {
@@ -46,11 +50,14 @@ export default function UserPage() {
       <Route path="/userimport" element={<UserImport patients={patients} />} />
       <Route path="/preprocess" element={<Preprocess />} />
       <Route path="/"  element={<UserNotifications />} />
+      <Route path="/form" element={<Form/>}/>
+      <Route path="/selecttype" element={<SelectType/>}/>
     </Routes>
   </BrowserRouter>
 
 
-<Footer/>
+
+{/* <Footer/> */}
   </>
   )
 }

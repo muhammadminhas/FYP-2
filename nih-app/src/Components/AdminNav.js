@@ -36,6 +36,14 @@ export default function AdminNav() {
           links[2].classList.remove('active');
           links[5].classList.add('active');
             }
+            if(window.location.pathname=="/modeltraining"){
+              links[1].classList.remove('active');
+            links[0].classList.remove('active');
+            links[3].classList.add('active');
+            links[4].classList.remove('active');
+            links[2].classList.remove('active');
+            links[5].classList.remove('active');
+              }
   
   }, []);
   return (
@@ -44,7 +52,7 @@ export default function AdminNav() {
   <a id="nav-view" className="nav-link" aria-current="page" href="/">View Data</a>
   <a id="nav" className="nav-link"  href="/ImportExport">Import/Export Data</a>
   <a id="nav" className="nav-link" href="/preprocess">Preprocess Data</a>
-  <a id="nav" className="nav-link" href="#">Model Training</a>
+  <a id="nav" className="nav-link" href="/modeltraining">Model Training</a>
   <a id="nav" className="nav-link" href="#">Model Testing</a>
   <a id="nav" className="nav-link" href="/adminnotifications">Notifications</a>
   

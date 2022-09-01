@@ -7,6 +7,7 @@ import AdminNav from '../Components/AdminNav';
 import {useState,useEffect} from 'react';
 import ImportExport from '../Components/ImportExport';
 import AdminNotifications from '../Components/AdminNotifications';
+import ModelTraining from '../Components/ModelTraining'
 import {
   BrowserRouter,
   Switch,
@@ -49,6 +50,7 @@ export default function AdminPage() {
       <Route path="/importexport" element={<ImportExport patients={patients} insertedRecord={insertedRecord}/>} />
       <Route path="/preprocess" element={<Preprocess insertedRecord={insertedRecord} />} />
       <Route path="/adminnotifications" element={<AdminNotifications/>} />
+      <Route path="/modeltraining" element={<ModelTraining/>}/>
     </Routes>
   </BrowserRouter>
 
