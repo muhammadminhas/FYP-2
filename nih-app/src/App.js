@@ -156,8 +156,9 @@ function App() {
 </Routes>
 </BrowserRouter> */}
  <Header/>
-<UserPage/>
+<AdminPage/>
 <Footer/>
+
 
 
   

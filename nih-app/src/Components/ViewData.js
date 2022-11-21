@@ -4,6 +4,21 @@ import { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 
 export default function Body(props) {
+  const [patients,setPatients] = useState([]);
+  useEffect(()=>{
+      fetch('http://localhost:5000/get',{
+        'method' : 'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+      .then(resp => resp.json())
+      .then(resp => setPatients(resp),
+      console.log(patients)
+      )
+      .catch(error => console.log(error))
+
+  },[])
   function toggle() {
     var x = document.getElementById("#viewbtn");
     var y=document.getElementById('#outerwrapper')
@@ -42,9 +57,9 @@ export default function Body(props) {
            
           </select>
           <br />
-          <button type="button" onClick={show} id='viewbtn' className="btn btn-primary btn-md" style={{ backgroundColor: '#62306A', width: '100px' }}>View</button>
-          <button type="button" onClick={hide} id='cancelbtn' className="btn btn-primary btn-md" style={{ backgroundColor: 'red', width: '100px',visibility:"hidden" }}>Cancel</button>
-          <div id="outerwrapper" style={{visibility:'hidden'}}>
+          {/* <button type="button" onClick={show} id='viewbtn' className="btn btn-primary btn-md" style={{ backgroundColor: '#62306A', width: '100px' }}>View</button>
+          <button type="button" onClick={hide} id='cancelbtn' className="btn btn-primary btn-md" style={{ backgroundColor: 'red', width: '100px',visibility:"hidden" }}>Cancel</button> */}
+          <div id="outerwrapper" >
             <div id="innerwrapper">
             <table className="table">
               <thead className='thead-dark ' style={{position:'sticky',top:'0px',background:'#62306A',color:'white'}} >
@@ -83,7 +98,7 @@ export default function Body(props) {
                 </tr>
               </thead>
               <tbody id="bodytable">
-                {props.patients.map((patients) => (
+                {patients.map((patients) => (
                   <tr id="bodytableelements">
                     
                       <td>{patients.id}</td>

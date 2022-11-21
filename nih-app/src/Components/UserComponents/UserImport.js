@@ -306,27 +306,20 @@ const Export={
     <div style={{ backgroundColor: '#D4D4D4',height:"100%",paddingBottom:"0px",marginTop:'0px'}} class="row">
  
     <div className="row" style={{ width: '80%', marginLeft: '10%', backgroundColor: 'white', height: 'calc(100vh - 350px)',display:"flex" }}>
-    
-    
-    <div style={{width:"30vh",height:"15vh",background:"#62306A",position:"absolute",right:'20vh',marginTop:"20vh" ,textAlign:"center"}} id="templatediv" className="float-right">
+    <div style={{width:"30vh",height:"15vh",background:"#62306A",position:"absolute",right:'20vh',marginTop:"8vh" ,marginLeft:"20vh",textAlign:"center",padding:"0px"}} id="templatediv">
 
       <p style={{color:"white",fontSize:"25px",textAlign:'center'}}>CSV File Template</p>
       <button type="button" id='viewbtn' className="btn btn-primary btn-md" style={{ backgroundColor: '#706DF3', width: '100px',marginLeft:'0vh'}}><CSVLink style={{color:'white',textDecoration:'none'}} {...templateDownload}>Download</CSVLink></button>
      
     </div>
-      <div className="col-mg-12 col-lg-12 col-sm-12" style={{ marginTop: '5%' }}>
-      <span style={{ fontSize: '24px', fontFamily: 'Open Sans', fontWeight: 'bold' }}>Export Dataset:</span>
-          <select disabled className="form-select form-select-lg .disabled" aria-label=".form-select-lg example" style={{width:'40vh'}}>
-            <option selected>NIH Dataset</option>
-           
-          </select>
-          <br />
-        <button type="button" id='viewbtn' className="btn btn-primary btn-md" style={{ backgroundColor: '#62306A', width: '100px',marginLeft:'0vh' }}><CSVLink style={{color:'white',textDecoration:'none'}} {...Export}>Export</CSVLink></button>
-       
+    
+    
+      <div className="col-mg-12 col-lg-12 col-sm-12">
+      
         <h1 style={{ fontSize: '24px', fontFamily: 'Open Sans', fontWeight: 'bold' ,marginTop:"9vh",marginBottom:"0vh"}}>Import Dataset:</h1>
 
 
-     <div id="importdiv" style={{width:"40vh"}}>
+     <div id="importdiv" style={{width:"80%"}}>
      <CSVReader
       onUploadAccepted={(results: any) => {
         console.log('---------------------------');
@@ -381,16 +374,21 @@ const Export={
           'username':'User1',
           'status':'pending',
         }
+        var counter=0;
         for(var i=0;i<29;i++){
-      
-          if(data[i]==results.data[0][i]){
-            setFlage("True");
+          for(var j=0;j<29;j++){
+            if(data[i]==results.data[0][j]){
+              counter=counter+1;
+            }
           }
-          else{
-            setFlage("False");
-          }
-          }
-
+        
+        }
+        if(counter==29){
+          setFlage("True");
+        }
+        else{
+          setFlage("False");
+        }
         setResult(result)
         for(var i=0;i<result.length;i++){
           let data1={
@@ -526,6 +524,7 @@ const Export={
     <button type="button" onClick={importdata} id='Importbtn' className="btn btn-primary btn-md" style={{ backgroundColor: '#62306A', width: '100px' }}>Import</button>
     
      </div>
+     
      
 
 

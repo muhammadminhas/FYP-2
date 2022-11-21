@@ -395,14 +395,29 @@ const Export={
         setResult(result);
         console.log(result)
         // flage to check wheather the import is according to format or not
-        for(var i=0;i<29;i++){
+        var counter=0;
+        // for(var i=0;i<29;i++){
       
-        if(data[i]==results.data[0][i]){
+        // if(data[i]==results.data[0][i]){
+        //   setFlage("True");
+        // }
+        // else{
+        //   setFlage("False");
+        // }
+        // }
+        for(var i=0;i<29;i++){
+          for(var j=0;j<29;j++){
+            if(data[i]==results.data[0][j]){
+              counter=counter+1;
+            }
+          }
+        
+        }
+        if(counter==29){
           setFlage("True");
         }
         else{
           setFlage("False");
-        }
         }
         //////////////////
         let data1={

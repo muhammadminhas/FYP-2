@@ -1,11 +1,21 @@
 import {CSVLink} from 'react-csv';
 import React, { useState, CSSProperties } from 'react';
 import {toast} from 'react-toastify'; 
+import {Link} from "react-router-dom";
 import {
   useCSVReader,
   lightenDarkenColor,
   formatFileSize,
 } from 'react-papaparse';
+function handleRemove(){
+  fetch('/deleteindividual', {
+    method: 'DELETE',
+    header: {
+       'Accept' : 'application/json',
+       'Content-Type' : 'application/json',
+      }
+    })
+}
 const GREY = '#CCC';
 const GREY_LIGHT = 'rgba(255, 255, 255, 0.4)';
 const DEFAULT_REMOVE_HOVER_COLOR = '#A01919';
@@ -85,6 +95,16 @@ const styles = {
 function changeFun(){
   window.location.href="/selecttype";
 }
+function multiuploadbtn(){
+  document.getElementById('multiupload').style.visibility='visible';
+  fetch('/delete', {
+    method: 'DELETE',
+    header: {
+       'Accept' : 'application/json',
+       'Content-Type' : 'application/json',
+      }
+    })
+}
 export default function MakePrediction() {
 
   var filename;
@@ -105,10 +125,11 @@ const [removeHoverColor, setRemoveHoverColor] = useState(
           </select>
           <br />
           <div className="text-center">
-          <button type="button"  id='viewbtn' className="btn btn-primary btn-md text-center" onClick={changeFun}  style={{ backgroundColor: '#62306A', width: '250px' }}>Individual Data Prediction</button>
-<button type="button"  id='viewbtn' className="btn btn-primary btn-md" style={{ backgroundColor: '#62306A', width: '250px',marginLeft:"1vh" }}>Multi Data Prediction</button>
+          <Link to="/selecttype"><button type="button"  id='viewbtn' className="btn btn-primary btn-md text-center"   style={{ backgroundColor: '#62306A', width: '250px' }}>Individual Data Prediction</button></Link>
+<Link to="/multiprediction"><button type="button"  id='viewbtn' className="btn btn-primary btn-md" onClick={multiuploadbtn} style={{ backgroundColor: '#62306A', width: '250px',marginLeft:"1vh" }}>Multi Data Prediction</button></Link>
 
 </div>
+<div id="multiupload" style={{visibility:"hidden"}}>
           <br />
           <span style={{ fontSize: '24px', fontFamily: 'Open Sans', fontWeight: 'bold' }}>Upload CSV File:</span>
           <div>
@@ -189,10 +210,11 @@ const [removeHoverColor, setRemoveHoverColor] = useState(
       )}
     </CSVReader>
 <br />
+</div>
     </div>
-   < div className="col-md-12 col-lg-12 col-sm-12 text-center"> 
+   {/* < div className="col-md-12 col-lg-12 col-sm-12 text-center"> 
     <button type="button"  id='viewbtn' className="btn btn-primary btn-md text-center" style={{ backgroundColor: '#62306A', width: '100px' }}>Submit</button>
-    </div>
+    </div> */}
     <br />
       
         </div>

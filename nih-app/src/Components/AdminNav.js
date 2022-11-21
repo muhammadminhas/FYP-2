@@ -44,6 +44,15 @@ export default function AdminNav() {
             links[2].classList.remove('active');
             links[5].classList.remove('active');
               }
+              if(window.location.pathname=="/makeprediction"){
+              links[1].classList.remove('active');
+              links[0].classList.remove('active');
+              links[4].classList.add('active');
+              links[3].classList.remove('active');
+              links[2].classList.remove('active');
+              links[5].classList.remove('active');
+                }
+
   
   }, []);
   return (
@@ -53,7 +62,7 @@ export default function AdminNav() {
   <a id="nav" className="nav-link"  href="/ImportExport">Import/Export Data</a>
   <a id="nav" className="nav-link" href="/preprocess">Preprocess Data</a>
   <a id="nav" className="nav-link" href="/modeltraining">Model Training</a>
-  <a id="nav" className="nav-link" href="#">Model Testing</a>
+  <a id="nav" className="nav-link" href="/makeprediction">Model Testing</a>
   <a id="nav" className="nav-link" href="/adminnotifications">Notifications</a>
   
 </nav>

@@ -39,7 +39,7 @@ React.useEffect(() => {
        <nav className="nav nav-tabs nav-pills nav-fill" id="navs">
      
   <a className="nav-link" aria-current="page" href="/viewdata">View Data</a>
-  <a className="nav-link"  href="/userImport">Import/Export Data</a>
+  <a className="nav-link"  href="/userImport">Import Data</a>
   <a className="nav-link" href="/makeprediction">Make Prediction</a>
   <a className="nav-link" href="/">Status</a>
   

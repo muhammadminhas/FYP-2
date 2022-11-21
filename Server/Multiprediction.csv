@@ -1,0 +1,12 @@
+country,education,employment,case_definition,type_of_resistance,x_ray_count,organization,affect_pleura,overall_percent_of_abnormal_volume,le_isoniazid,le_rifampicin,le_p_aminosalicylic_acid,hain_isoniazid,hain_rifampicin,period_start,period_end,period_span,regimen_count,qure_peffusion,treatment_status,regimen_drug,comorbidity,ncbi_bioproject,gene_name,x_ray_exists,ct_exists,genomic_data_exists,qure_consolidation,outcome
+2,5,7,3,0,1,13,2,4,4,4,3,4,3,145,94,81,1,0,11,745,33,0,0,1,0,0,0,
+2,5,1,3,0,0,13,2,5,1,1,3,2,1,174,701,646,4,2,20,565,33,59,44,0,0,1,2,
+1,1,1,3,0,2,16,3,4,2,2,3,2,1,153,453,434,2,0,11,337,33,78,81,1,1,1,3,
+5,0,7,5,0,0,3,2,5,2,2,6,2,1,139,511,502,1,2,20,542,36,59,75,0,0,1,2,
+7,5,3,3,0,1,11,0,4,4,4,3,4,3,144,176,165,0,0,16,745,38,77,0,1,1,1,3,
+5,2,4,3,0,1,3,2,4,1,1,3,4,3,176,186,145,0,2,20,745,38,0,0,1,0,0,2,
+2,5,7,3,0,1,13,2,5,1,1,6,1,0,149,449,434,3,0,16,475,33,70,18,1,0,1,3,
+1,3,1,3,0,3,16,3,4,4,4,6,1,0,180,213,166,0,0,20,745,38,0,0,1,1,0,0,
+1,2,7,1,0,0,16,3,5,4,4,4,1,0,243,583,477,0,2,20,48,33,0,0,0,1,0,2,
+1,1,1,1,0,0,16,3,5,2,2,6,1,0,213,704,641,0,2,20,31,33,0,0,0,1,0,2,
+5,2,7,1,0,1,3,2,4,2,2,6,2,1,153,73,51,0,2,20,745,33,0,0,1,0,0,2,
